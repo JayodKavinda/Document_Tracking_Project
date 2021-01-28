@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models.User
+namespace WebAPI.Models.UserModel
 {
     public class UserLoginModel
     {
@@ -14,5 +14,7 @@ namespace WebAPI.Models.User
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        
     }
 }

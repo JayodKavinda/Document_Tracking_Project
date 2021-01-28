@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using WebAPI.Models.User;
+using WebAPI.Models.UserModel;
 
 namespace WebAPI
 {

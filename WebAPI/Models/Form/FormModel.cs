@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using WebAPI.Models.UserModel;
+
+namespace WebAPI.Models.Form
+{
+    public class FormModel
+    {
+
+        public int FormModelId { get; set; }
+      
+        public User User { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+}

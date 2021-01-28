@@ -4,15 +4,24 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models.User
+namespace WebAPI.Models.UserModel
 {
     public class UserRegistrationModel
     {
-
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
-        public string NameTitel { get; set; }
+
+        [Required]
+        public string NameTitle { get; set; }
+
+   
         public int UserTypeNum { get; set; }
+
+        [Required]
+        public string Department { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]

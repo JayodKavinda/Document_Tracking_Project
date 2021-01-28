@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI.Models.User;
+using WebAPI.Models.Form;
+using WebAPI.Models.UserModel;
 
 namespace WebAPI.Data
 {
@@ -25,5 +26,7 @@ namespace WebAPI.Data
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<VehicleReservationForm> VehicleReservationForms { get; set; }
     }
 }

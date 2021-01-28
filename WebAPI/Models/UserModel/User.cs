@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models.User
+namespace WebAPI.Models.UserModel
 {
     public class User: IdentityUser
     {
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } 
         public string LastName { get; set; }
         public string NameTitle { get; set; }
         public int UserTypeNum { get; set; }
