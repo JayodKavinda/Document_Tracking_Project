@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
 {
-    public partial class UpdateIdentityUser : Migration
+    public partial class newInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,16 +63,46 @@ namespace WebAPI.Migrations
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "VehicleReservationForms",
+                columns: table => new
+                {
+                    VehicleReservationFormId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromRoute = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ToRoute = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EstimateTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EstimateDistance = table.Column<double>(type: "float", nullable: false),
+                    FormModelId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VehicleReservationForms", x => x.VehicleReservationFormId);
+                    table.ForeignKey(
+                        name: "FK_VehicleReservationForms_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "IdentityRole",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6dc9e18c-f38f-43f9-91aa-7a3ef1911d7a", "8b0c3776-8de6-4233-967b-46902aa96e75", "Visitor", "VISITOR" },
-                    { "d7a95891-336b-4b6d-bdcd-66dce0e6b786", "8c441bd3-c951-448e-98c4-e78a7569853b", "Dean", "DEAN" },
-                    { "213ffd41-7396-46a9-bf9a-b3f0fc56e124", "c484695e-4706-460e-adfa-7e6e58937654", "Hod", "HOD" },
-                    { "aca43e5d-2867-4b2c-b72d-4fa263fa9da7", "902b3988-a622-48d7-ae43-1f033cc56e79", "Administrator", "ADMINISTRATOR" }
+                    { "b365bf7e-8ae7-4330-b307-5be74274e297", "d7fbdc24-099a-47c3-a40a-3ff205a3af32", "Visitor", "VISITOR" },
+                    { "065cfccf-18f1-4e40-ac2d-2a534d69089e", "06672b28-5677-4022-b38d-0f5dff46e734", "Dean", "DEAN" },
+                    { "764c3ca0-1e9a-48fb-82e2-20fcfe4a4034", "ebb43f84-f8ce-4371-94cc-8fe15817eb08", "Hod", "HOD" },
+                    { "28ff1c7f-5486-4eaf-9190-aa5840a7e574", "0d293191-0655-4558-9b1f-dc71179b5cd4", "Administrator", "ADMINISTRATOR" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehicleReservationForms_UserId",
+                table: "VehicleReservationForms",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -82,6 +112,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "IdentityUserRole<string>");
+
+            migrationBuilder.DropTable(
+                name: "VehicleReservationForms");
 
             migrationBuilder.DropTable(
                 name: "Users");

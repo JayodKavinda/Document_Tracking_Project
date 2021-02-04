@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Models.Form;
 
 namespace WebAPI.Models.UserModel
 {
@@ -15,5 +16,7 @@ namespace WebAPI.Models.UserModel
         public int UserTypeNum { get; set; }
 
         public string Department { get; set; }
+
+        public ICollection<VehicleReservationForm> VehicleReservationForms { get; set; }
     }
 }

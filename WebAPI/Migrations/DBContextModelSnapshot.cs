@@ -40,29 +40,29 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "59fb6a84-1f6b-470a-8601-f20c3cfa9535",
-                            ConcurrencyStamp = "f6094d42-44a7-440a-8850-8841e2867d4f",
+                            Id = "877a8ecd-862d-4835-ab23-98ab5cd573d6",
+                            ConcurrencyStamp = "294d6573-ae1c-467b-af7d-867c850cd3b6",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "a16518d4-4a1c-42d3-b767-af415702f78a",
-                            ConcurrencyStamp = "49e41b2b-6eef-4f97-b8bd-12a2ae37cf62",
+                            Id = "adc4abbf-b5cb-48d8-8c48-038996bb10bd",
+                            ConcurrencyStamp = "1926f964-c716-44c4-8fed-b7fb58866006",
                             Name = "Dean",
                             NormalizedName = "DEAN"
                         },
                         new
                         {
-                            Id = "9e0c9b50-0838-4f62-9b09-67764ef7004c",
-                            ConcurrencyStamp = "6c7caaa1-12e5-4bb5-9ca1-0d14988567c4",
+                            Id = "c402a0bc-24ef-4886-bda5-5ac7209e5245",
+                            ConcurrencyStamp = "dc6584f7-3253-437a-9d7a-8f56e28f11bf",
                             Name = "Hod",
                             NormalizedName = "HOD"
                         },
                         new
                         {
-                            Id = "6e4cd7ce-dc06-4684-a8af-7ee792e1283e",
-                            ConcurrencyStamp = "154957cd-5880-40a5-8bb2-f16983cbe360",
+                            Id = "794d1c1e-924a-4359-a7b5-0fe90419a593",
+                            ConcurrencyStamp = "84f81545-f8bc-4280-8159-7d57102b2f3c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -185,11 +185,14 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Models.Form.VehicleReservationForm", b =>
                 {
-                    b.HasOne("WebAPI.Models.UserModel.User", "User")
-                        .WithMany()
+                    b.HasOne("WebAPI.Models.UserModel.User", null)
+                        .WithMany("VehicleReservationForms")
                         .HasForeignKey("UserId");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("WebAPI.Models.UserModel.User", b =>
+                {
+                    b.Navigation("VehicleReservationForms");
                 });
 #pragma warning restore 612, 618
         }
