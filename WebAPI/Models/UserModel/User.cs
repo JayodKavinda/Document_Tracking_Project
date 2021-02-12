@@ -18,5 +18,7 @@ namespace WebAPI.Models.UserModel
         public string Department { get; set; }
 
         public ICollection<VehicleReservationForm> VehicleReservationForms { get; set; }
+
+        public ICollection<RisograghForm> RisograghForms  { get; set; }
     }
 }
