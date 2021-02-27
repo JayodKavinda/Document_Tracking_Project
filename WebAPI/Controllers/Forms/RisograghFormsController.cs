@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace WebAPI.Controllers.Forms
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<RisograghForm>> PostRisograghForm(RisograghForm risograghForm)
         {
             _context.RisograghForm.Add(risograghForm);
@@ -34,14 +36,25 @@ namespace WebAPI.Controllers.Forms
         }
 
 
-        // GET: api/RisograghForms -> get all forms
+        // GET: api/RisograghForms                      -> get all forms
+       /* [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm()
         {
             return await _context.RisograghForm.ToListAsync();
+
+
+        }*/
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm(string id)
+        {
+            return await _context.RisograghForm.Where(x => x.UserId == id).ToListAsync();
         }
 
-        // GET: api/RisograghForms/5 -> get spesific form with id
+        // GET: api/RisograghForms/:id                  -> get spesific form with id
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<RisograghForm>> GetRisograghForm(int id)
         {

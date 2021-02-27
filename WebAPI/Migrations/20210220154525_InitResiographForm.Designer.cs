@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210220154525_InitResiographForm")]
+    partial class InitResiographForm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,29 +42,29 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a2f27a65-d140-4c38-afc7-8d4cc57d80ba",
-                            ConcurrencyStamp = "691bcb7e-c2c7-499e-920e-359dc5f40779",
+                            Id = "4ca8722c-47ac-41ba-8a0a-ecde62249fdb",
+                            ConcurrencyStamp = "11335885-e90c-4c0e-b208-c6b23604baa5",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "9031f375-70da-4cc5-be8d-802594e906ea",
-                            ConcurrencyStamp = "1532e6e5-53af-4147-8cfe-eb865ffa5468",
+                            Id = "1906629e-37ab-4b8f-a998-e46373543106",
+                            ConcurrencyStamp = "c73d84de-22db-4217-ab43-1e7d67aee180",
                             Name = "Dean",
                             NormalizedName = "DEAN"
                         },
                         new
                         {
-                            Id = "d8c8b287-9e9f-4523-b37f-146145cb734b",
-                            ConcurrencyStamp = "4817c27a-5261-4e14-963d-9db4b4b2a167",
+                            Id = "be293bb8-b8f7-4be4-b4e6-d4d973377922",
+                            ConcurrencyStamp = "425ebbd1-bd50-484c-aab2-748d2a427a28",
                             Name = "Hod",
                             NormalizedName = "HOD"
                         },
                         new
                         {
-                            Id = "a7f95727-9077-4cb5-b3bf-c77af31e13ab",
-                            ConcurrencyStamp = "84fa3398-f1af-496f-b249-dd8282146cbb",
+                            Id = "94743f93-6a36-454e-8aa1-ae7fbdd8ff44",
+                            ConcurrencyStamp = "7c2daa65-fcb2-4724-bae1-8ac54f8fb299",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -121,14 +123,14 @@ namespace WebAPI.Migrations
                     b.Property<int>("NumberOfPage")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaperProvided")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("PaperProvided")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SizeOfCopies")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SizeOfCopies")
+                        .HasColumnType("int");
 
                     b.Property<string>("TeacherName")
                         .HasColumnType("nvarchar(max)");
@@ -157,8 +159,8 @@ namespace WebAPI.Migrations
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Designation")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Designation")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

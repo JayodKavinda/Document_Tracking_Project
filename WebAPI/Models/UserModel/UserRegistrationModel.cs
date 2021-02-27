@@ -17,8 +17,8 @@ namespace WebAPI.Models.UserModel
         [Required]
         public string NameTitle { get; set; }
 
-   
-        public int UserTypeNum { get; set; }
+
+        public string Designation { get; set; }
 
         [Required]
         public string Department { get; set; }

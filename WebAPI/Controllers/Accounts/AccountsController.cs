@@ -23,11 +23,13 @@ namespace WebAPI.Controllers.Accounts
 
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IConfigurationSection _jwtSettings;
-        public AccountsController(IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
+        public AccountsController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _mapper = mapper;
             _userManager = userManager;
+            _signInManager = signInManager;
             _jwtSettings = configuration.GetSection("JwtSettings");
         }
 
@@ -39,12 +41,30 @@ namespace WebAPI.Controllers.Accounts
             return new User();
         }
 
+        class ReturnUser
+        {
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string Token { get; set; }
+            public string UserId { get; set; }
+
+        }
+
        
         [HttpGet("Home")]
         public String Home()   //api/Accounts/Home
         {
             return "Document Tracking System";
         }
+
+
+        /*[HttpGet]  // api/Accounts
+        public async Task<ActionResult> CurrentUser()
+        {
+
+            var result = await _userManager.FindByIdAsync();
+           
+        }*/
 
         [HttpPost("Register")]  // api/Accounts/Register
         public async Task<ActionResult> Register(UserRegistrationModel userModel)
@@ -64,18 +84,28 @@ namespace WebAPI.Controllers.Accounts
         {
             var user = await _userManager.FindByEmailAsync(userModel.Email);
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
-            {
+             if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
+             {
+
+                ReturnUser userObj = new ReturnUser();
+                userObj.Email = user.Email;
+                userObj.FirstName = user.FirstName;
+                userObj.UserId = user.Id;
+
+
                 //JWT Athentication
                 var signingCredentials = GetSigningCredentials();
                 var claims = GetClaims(user);
                 var tokenOptions = GenerateTokenOptions(signingCredentials, await claims);
                 var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(token);
+                userObj.Token = token;
+                return Ok(userObj);
 
-                //Testing
-              //  return StatusCode(200);
-            }
+
+
+                 //Testing
+               //  return StatusCode(200);
+             }
             return Unauthorized("Invalid Authentication");
 
         }
