@@ -45,6 +45,13 @@ namespace WebAPI.Controllers.Accounts
         {
             return "Document Tracking System";
         }
+        class SystemUser
+        {
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string Token { get; set; }
+            public string UserId { get; set; }
+        }
 
         [HttpPost("Register")]  // api/Accounts/Register
         public async Task<ActionResult> Register(UserRegistrationModel userModel)
@@ -64,6 +71,12 @@ namespace WebAPI.Controllers.Accounts
         {
             var user = await _userManager.FindByEmailAsync(userModel.Email);
 
+            SystemUser systemUser = new SystemUser();
+
+            systemUser.Email = user.Email;
+            systemUser.FirstName = user.FirstName;
+            systemUser.UserId = user.Id;
+
             if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
             {
                 //JWT Athentication
@@ -71,10 +84,11 @@ namespace WebAPI.Controllers.Accounts
                 var claims = GetClaims(user);
                 var tokenOptions = GenerateTokenOptions(signingCredentials, await claims);
                 var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(token);
 
-                //Testing
-              //  return StatusCode(200);
+                systemUser.Token = token;
+                return Ok(systemUser);
+
+
             }
             return Unauthorized("Invalid Authentication");
 

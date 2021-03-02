@@ -36,9 +36,16 @@ namespace WebAPI.Controllers.Forms
 
         // GET: api/RisograghForms -> get all forms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm()
+        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm(String id)
         {
-            return await _context.RisograghForm.ToListAsync();
+            return await _context.RisograghForm.Where(x => x.UserId == id).ToListAsync();
+        }
+
+        [Route("inbox")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetInboxRisograghForm(string id)
+        {
+            return await _context.RisograghForm.Where(x => x.FinalLevelUser == id).ToListAsync();
         }
 
         // GET: api/RisograghForms/5 -> get spesific form with id
@@ -55,7 +62,7 @@ namespace WebAPI.Controllers.Forms
             return risograghForm;
         }
 
-        // PUT: api/RisograghForms/5
+        // PUT: api/RisograghForms/5  
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -87,7 +94,7 @@ namespace WebAPI.Controllers.Forms
             return NoContent();
         }
 
-       
+
         // DELETE: api/RisograghForms/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RisograghForm>> DeleteRisograghForm(int id)
