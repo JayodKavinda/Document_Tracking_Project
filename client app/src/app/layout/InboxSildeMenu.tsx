@@ -1,0 +1,47 @@
+import React from 'react'
+import { Link, NavLink, Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Grid, Menu, Segment } from 'semantic-ui-react'
+import RisographFormList from '../../features/risographForms/dashboard/RisographFormList';
+
+ const InboxSideMenu = () => {
+    let { path, url } = useRouteMatch();
+
+    return (
+        <Grid style={{marginTop:'1em'}}>
+        <Grid.Column width={4}>
+          <Menu fluid vertical tabular>
+            <Menu.Item
+              name='Request for Risograph Copies'
+              as ={NavLink} exact to={`${url}`}
+              
+            />
+            <Menu.Item
+              name='Application for Vehical Reservation'
+              as ={NavLink} exact to={`${url}/vehicalReservation`}
+            />
+            <Menu.Item
+              name='Voucher Application'
+              as ={NavLink} exact to={`${url}/voucher`}
+            />
+            <Menu.Item
+              name='Bank Application'
+              as ={NavLink} exact to={`${url}/bankApplication`}
+            />
+          </Menu>
+        </Grid.Column>
+
+        <Grid.Column stretched width={12}>
+          
+          <Switch>
+                <Route exact path={path}>
+                <h3>NO Inbox messages</h3>
+                </Route>
+               
+        </Switch>
+         
+        </Grid.Column>
+      </Grid>
+    )
+}
+
+export default InboxSideMenu
