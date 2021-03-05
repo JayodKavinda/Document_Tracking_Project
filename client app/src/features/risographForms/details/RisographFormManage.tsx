@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, {  useContext, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Button, Card, Container, Header, Icon } from 'semantic-ui-react'
+import { Button, ButtonGroup, Card, Container, Divider, Header, Icon } from 'semantic-ui-react'
 import LoadingComponent from '../../../app/layout/LoadingComponent'
 import { RootStoreContext } from '../../../app/stores/rootStore'
 
@@ -12,20 +12,55 @@ interface DetailParams{
  const RisographFormDetails:React.FC<RouteComponentProps<DetailParams>> = ({match, history}) => {
   
   const rootStore = useContext(RootStoreContext)
-    const{selectedRisographForm:risographForm ,  loadRisographform, loadingInitial} = rootStore.risographFormStore;
+    const{selectedRisographForm:risographForm ,  loadRisographform, loadingInitial, editRisographForm} = rootStore.risographFormStore;
 
     useEffect(()=>{
       loadRisographform(+match.params.id)
     },[loadRisographform])
+
+   
+    const updateForm=()=>{
+      let newRisographForm={
+        risograghFormId:risographForm?.risograghFormId,
+        documentTitle:risographForm!.documentTitle,
+        teacherName:risographForm!.teacherName,
+        numberOfPage:risographForm!.numberOfPage,
+        numberOfCopies:risographForm!.numberOfCopies,
+        sizeOfCopies:risographForm!.sizeOfCopies,
+        purpose:risographForm!.purpose,
+        paperProvided:risographForm!.paperProvided,
+        copyTo:risographForm!.copyTo,
+        dueDateTime:risographForm!.dueDateTime,
+        
+        finalLevelUser:risographForm!.finalLevelUser,
+        formStatus: 'Approved',
+        finalUserDateTime:risographForm!.finalUserDateTime,
+
+        formModelId:risographForm!.formModelId,
+        formModelName:risographForm!.formModelName,
+        userId:risographForm!.userId,
+        initDateTime:risographForm!.initDateTime,
+        };
+    editRisographForm(newRisographForm)
+    }
    
     if(loadingInitial || !risographForm) return <LoadingComponent content ='Loading activity..'/>
 
     return (
 
-      <Container  style={{marginTop:'7em'}}>
+      <Container style={{marginTop:'7em'}}>
         <Card fluid>
-        <Header style={{marginTop:'2em'}} textAlign ='center' size ='small' >Department of Electrical and Infromation  <br/> Engineering Faculty of Engineering - University of Ruhuna</Header>
-        <Header as ='h1'  textAlign ='center'>Request for Risograph Copies</Header>
+            <div  style={{ background:'FloralWhite'}}>
+            <Header as='h2'  style={{margin:'1em'}}>
+            <Icon color='green' name='envelope open' />
+                <Header.Content>
+                Approval pending Application
+                <Header.Subheader>Manage your preferences</Header.Subheader>
+                </Header.Content> 
+            </Header>
+            </div>
+       
+        <Header as ='h2'  textAlign ='center'>Request for Risograph Copies</Header>
           
         <Card.Content>
           <Card.Header> Document Title: {risographForm!.documentTitle} </Card.Header>
@@ -50,11 +85,32 @@ interface DetailParams{
           
         </Card.Content>
       </Card>
+        <Divider/>
+        
+        <h3>Your action ?</h3>
+        {risographForm.formStatus=='Pending' ?(
+          <ButtonGroup  size='large' fluid>
+          <Button basic icon='trash' color='orange' content = 'Cancel Application' />
+          <Button basic icon='times' negative content = 'Reject Request' />
+          <Button onClick={updateForm} icon='check' positive content = 'Approve Request' />
+  
+          </ButtonGroup>
+        ):(
+          <h3>You {risographForm.formStatus} this application</h3>
+        )
+
+         
+ 
+        }
+       
+        
+        
+        <Divider/>
 
       <Card fluid>
         
         <Card.Content>
-          <Card.Header>Here is your Document flow</Card.Header>
+          <Card.Header>Document flow</Card.Header>
           <Card.Meta>
             <span> Check your document progress and status </span>
           </Card.Meta>

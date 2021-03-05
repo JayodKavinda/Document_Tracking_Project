@@ -2,7 +2,6 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Item, Label, Segment } from 'semantic-ui-react'
-import RisographFormStore from '../../../app/stores/risographFormStore'
 import { RootStoreContext } from '../../../app/stores/rootStore'
 
 
@@ -13,7 +12,7 @@ const RisographFormList:React.FC = () => {
     const{risographForms} = rootStore.risographFormStore;
 
     return (
-        <Segment clearing  style={{marginRight : '20px'}} >
+        <Segment clearing  style={{marginRight : '10px',background:'PaleGreen'}} >
         <Item.Group divided>
             {risographForms.map(risographForm =>(
                 <Item key ={risographForm.risograghFormId}>
@@ -26,8 +25,9 @@ const RisographFormList:React.FC = () => {
                         </div>
                 </Item.Description>
                 <Item.Extra>
-                    <Button as = {Link} to={`/risographForms/${risographForm.risograghFormId}`} floated='right' content='View' color='green'></Button>
-                    <Label basic content='Risograph Copies Request'/>
+                    <Button as = {Link}  to={`/risographForms/${risographForm.risograghFormId}`} floated='right' content='View Application' color='green'></Button>
+                    <Label  style={{background:'LightGreen'}} basic content='Risograph Copies Request'/>
+                    <Label  style={{background:'LightGreen'}} basic content={risographForm.formStatus} />
                 </Item.Extra>
                 </Item.Content>
                 </Item>

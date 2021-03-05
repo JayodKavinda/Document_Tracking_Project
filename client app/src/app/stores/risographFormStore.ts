@@ -16,10 +16,9 @@ export default class RisographFormStore{
         this.rootStore = rootStore;
       }
      
-  
-
     
     @observable.shallow risographForms:IRisographForm[] =[];
+    @observable inboxRisographForms:IRisographForm[] =[];
     @observable loadingInitial = false;
     @observable selectedRisographForm: IRisographForm| undefined
     @observable submitting = false;
@@ -43,9 +42,45 @@ export default class RisographFormStore{
         }));
     }
 
+    @action loadInboxRisographForms= (id:string|null)=>{
+        this.loadingInitial=true;
+        agent.RisographForms.listInbox(id)
+        .then(risograhForms=>{
+            runInAction(()=>{
+                console.log(risograhForms)
+                risograhForms.forEach((risograhForm)=>{
+                    this.inboxRisographForms.push(risograhForm)
+                })
+            })
+        }).finally(()=>
+        runInAction(()=>{
+            this.loadingInitial=false
+        }));
+    }
+
+
     @action createRisographForm = (risographForm: IRisographForm)=>{
         this.submitting =true;
         agent.RisographForms.create(risographForm)
+        .then(()=>{
+            runInAction(()=>{
+                this.risographForms.push(risographForm)
+            })
+          }).then(()=>
+            runInAction(()=>{
+                this.submitting=false
+                
+            })).then(()=>{
+                history.push('/dashboard')
+               // this.rootStore.modalStore.openModal('tets');
+            })
+          
+
+    }
+
+    @action editRisographForm = (risographForm: IRisographForm)=>{
+        this.submitting =true;
+        agent.RisographForms.update(risographForm)
         .then(()=>{
             runInAction(()=>{
                 this.risographForms.push(risographForm)

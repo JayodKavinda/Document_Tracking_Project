@@ -4,17 +4,15 @@ import {  Link, NavLink } from 'react-router-dom'
 import { Button, Container, Dropdown, Icon, Image, Menu, Popup } from 'semantic-ui-react'
 import { RootStoreContext } from '../../app/stores/rootStore'
 
-
-
-
 const NavBar: React.FC =() => {
         const rootStore = useContext(RootStoreContext);
         const{ user, logout} = rootStore.userStore
+       
 
     return (
         <Menu fixed = 'top' inverted>
 
-        <Container>
+        <Container fluid>
         <Menu.Item header as ={NavLink} exact to ='/'>
             {/* <img src ="/assests/logo.png" alt = 'logo' style={{marginRight : '20px'}}/> */}
             Document Tracking System | University of Ruhuna
@@ -34,7 +32,7 @@ const NavBar: React.FC =() => {
             {user &&
             <Menu.Item position='right'>
             <Image avatar spaced='right' src={'/assests/user.png'} />
-            <Dropdown pointing='top left' text={user.firstName}>
+            <Dropdown pointing='top right' text={user.firstName}>
               <Dropdown.Menu>
                 <Dropdown.Item as={Link} to={`/profile/username`} text='My profile' icon='user'/>
                 <Dropdown.Item onClick={logout} text='Logout' icon='power' />

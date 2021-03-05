@@ -3,9 +3,9 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { Button, Card, Container, Grid, Image } from 'semantic-ui-react'
 
 export const NewDoc = () => {
-    let { path, url } = useRouteMatch();
+    let {  url } = useRouteMatch();
     return (
-        <Container>
+        <Container  style={{marginTop:'7em'}}>
             <Grid columns={3} divided>
             <Grid.Row>
                 <Grid.Column>

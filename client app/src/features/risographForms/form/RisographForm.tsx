@@ -44,9 +44,9 @@ const RisographForm: React.FC<RouteComponentProps> = ({history}) => {
     const handleSubmit = () => {
         let newRisographForm={
             ...risographForm, 
-            initDateTime: '2021-02-09T16:49',
+            initDateTime: '2021-03-02T16:49',
             userId: window.localStorage.getItem('userId'),  //getting current user
-            finalLevelUser:'8b355855-d903-4ff4-80ff-d8da3ffc23bc'  // coonst hoD -> retrive relevent HoDs id
+            finalLevelUser:'2da5b1f9-3686-482c-a1db-89f3328749ba'  // coonst hoD -> retrive relevent HoDs id
         };
         createRisographForm(newRisographForm)
         //history.push('/dashboard/forms');

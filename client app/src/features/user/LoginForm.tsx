@@ -1,7 +1,7 @@
 import { FORM_ERROR } from 'final-form'
 import React, { useContext } from 'react'
 import {Form as FinalForm, Field} from 'react-final-form'
-import { Button, Container, Form, Header, Label, Segment } from 'semantic-ui-react'
+import { Button, Container, Form, Grid, Header, Label, Segment } from 'semantic-ui-react'
 import TextInput from '../../app/common/Form/TextInput'
 import { IUserForm } from '../../app/models/user'
 import { RootStoreContext } from '../../app/stores/rootStore'
@@ -15,20 +15,22 @@ const LoginForm = () => {
     const {login} = rootStore.userStore
     return (
 
-        
-        
-                    <Segment inverted textAlign='center' vertical className='masthead' >
-                            <Container text>
+
+            <Segment inverted textAlign='center' vertical className='masthead' >
+         
+                
+                        <Container text>
                                 <Header as='h1' inverted>
                                     Document Tracking System
                                 </Header>
-                                <Header as='h2' inverted content='Faculty of Engineering | University of Ruhuna' />
-
-                            <FinalForm onSubmit = {(values:IUserForm)=> login(values).catch(err=>({
+                                <Header as='h3' inverted content='Faculty of Engineering | University of Ruhuna' />
+                                <br/>
+                                <br/>
+                            <FinalForm  onSubmit = {(values:IUserForm)=> login(values).catch(err=>({
                                     [FORM_ERROR]:err
                                 }))}
                                     render ={({handleSubmit , submitting, form, submitError})=>(
-                                    <Form onSubmit={handleSubmit} >
+                                    <Form onSubmit={handleSubmit}  style={{marginLeft:'9em',marginRight:'9em'}} >
                                         <Field        
                                         name= 'email'
                                      
@@ -36,6 +38,7 @@ const LoginForm = () => {
                                         placeholder='Email'
                                         
                                         />
+                                       
                                         <Field 
                                         name= 'password'
                                       
@@ -53,7 +56,10 @@ const LoginForm = () => {
                                     />
                                 
                             </Container>
-                        </Segment>
+                
+               
+                 
+        </Segment>
 
                
 

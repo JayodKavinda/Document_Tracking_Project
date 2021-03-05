@@ -1,12 +1,11 @@
-import { observe } from 'mobx'
-import { observer } from 'mobx-react-lite'
+
 import React from 'react'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 import { Input, Menu } from 'semantic-ui-react'
 
 export const TopMenuBar = () => {
 
-  let { path, url } = useRouteMatch();
+  let {  url } = useRouteMatch();
     return (
         <div>
         <Menu pointing>

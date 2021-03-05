@@ -9,9 +9,11 @@ export interface IRisographForm{
     paperProvided:string
     copyTo:string;
     dueDateTime:string;
+    
     finalLevelUser:string;
     formStatus:string;
     finalUserDateTime?:string;
+
     formModelId?:number;
     formModelName:string;
     userId:string | null;

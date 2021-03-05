@@ -1,15 +1,15 @@
 import React from 'react'
-import { Link, NavLink, Route, Switch, useRouteMatch } from 'react-router-dom'
-import { Grid, Menu, Segment } from 'semantic-ui-react'
-import RisographFormList from '../../features/risographForms/dashboard/RisographFormList';
+import {  NavLink, Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Grid, Menu } from 'semantic-ui-react'
+import InboxRisographFormList from '../../features/risographForms/dashboard/InboxRisographFormList';
 
  const InboxSideMenu = () => {
     let { path, url } = useRouteMatch();
 
     return (
-        <Grid style={{marginTop:'1em'}}>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
+        <Grid  style={{marginTop:'1em'}}>
+        <Grid.Column  width={3} >
+          <Menu fluid vertical tabular >
             <Menu.Item
               name='Request for Risograph Copies'
               as ={NavLink} exact to={`${url}`}
@@ -30,13 +30,21 @@ import RisographFormList from '../../features/risographForms/dashboard/Risograph
           </Menu>
         </Grid.Column>
 
-        <Grid.Column stretched width={12}>
+        <Grid.Column stretched width={13}>
           
           <Switch>
                 <Route exact path={path}>
-                <h3>NO Inbox messages</h3>
+                <InboxRisographFormList/>
                 </Route>
-               
+                <Route path={`${path}/vehicalReservation`}>
+                <h3>Inbox Application for Vehical Reservation</h3>
+                </Route>
+                <Route path={`${path}/voucher`}>
+                <h3>Inbox Voucher Application</h3>
+                </Route>
+                <Route path={`${path}/bankApplication`}>
+                <h3>Inbox Bank Applications</h3>
+                </Route>
         </Switch>
          
         </Grid.Column>

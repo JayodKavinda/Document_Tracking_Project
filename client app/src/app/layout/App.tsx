@@ -1,4 +1,4 @@
-import React , { useEffect ,Fragment, useContext} from 'react';
+import React , { Fragment} from 'react';
 import { Container } from 'semantic-ui-react';
 import NavBar from '../../features/nav/NavBar';
 import  RisographDashboard  from '../../features/risographForms/dashboard/RisographDashboard';
@@ -7,21 +7,13 @@ import { Route} from 'react-router-dom'
 import HomePage from '../../features/home/HomePage';
 import RisographForm from '../../features/risographForms/form/RisographForm';
 import RisographFormDetails from '../../features/risographForms/details/RisographFormDetails';
+import RisographFormManage from '../../features/risographForms/details/RisographFormManage';
 import { ToastContainer } from 'react-toastify';
 import { NewDoc } from '../../features/newDoc/NewDoc';
 import LoginForm from '../../features/user/LoginForm';
-import { RootStoreContext } from '../stores/rootStore';
-import SubmissionModal from './SubmissionModal';
-
-
-
 
 
 const App =()=> {
-
-  const rootStore  = useContext(RootStoreContext);
-  const{setAppLoaded,token} = rootStore.commonStore;
-
 
     return (
       <Fragment>
@@ -32,9 +24,10 @@ const App =()=> {
          <Route path ={'/(.+)'} render={() =>(
            <Fragment>
             <NavBar/>
-            <Container fluid style={{marginTop:'7em'}}>
+            <Container fluid style={{marginTop:'3.8em'}}>
             <Route path='/dashboard' component ={RisographDashboard}/>
-            <Route path='/risographForms/:id' component ={RisographFormDetails}/>
+            <Route exact path='/risographForms/:id' component ={RisographFormDetails}/>
+            <Route path='/risographForms/manage/:id' component ={RisographFormManage}/>
             <Route exact path='/createDoc' component ={NewDoc}/> 
             <Route path='/createDoc/risographForm' component ={RisographForm}/> 
             

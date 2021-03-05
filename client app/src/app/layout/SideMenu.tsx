@@ -8,8 +8,8 @@ import RisographFormList from '../../features/risographForms/dashboard/Risograph
 
     return (
         <Grid style={{marginTop:'1em'}}>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
+        <Grid.Column width={3}>
+          <Menu fluid vertical tabular > 
             <Menu.Item
               name='Request for Risograph Copies'
               as ={NavLink} exact to={`${url}`}
@@ -30,7 +30,7 @@ import RisographFormList from '../../features/risographForms/dashboard/Risograph
           </Menu>
         </Grid.Column>
 
-        <Grid.Column stretched width={12}>
+        <Grid.Column stretched width={13}>
           
           <Switch>
                 <Route exact path={path}>

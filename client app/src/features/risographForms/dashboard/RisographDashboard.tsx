@@ -19,7 +19,10 @@ import { RootStoreContext } from '../../../app/stores/rootStore'
 
     useEffect(()=>{
         rootStore.risographFormStore.risographForms  =[]
+        rootStore.risographFormStore.inboxRisographForms  =[]
+
         rootStore.risographFormStore.loadRisographForms(window.localStorage.getItem('userId'));
+        rootStore.risographFormStore.loadInboxRisographForms(window.localStorage.getItem('userId'));
     },[rootStore.risographFormStore]);
   
     if(rootStore.risographFormStore.loadingInitial) return <LoadingComponent content='Loading Applications...'/>
@@ -30,7 +33,7 @@ import { RootStoreContext } from '../../../app/stores/rootStore'
         <div>
             <TopMenuBar/>
 
-            <Container  style={{marginTop:'1em'} }>
+            <Container fluid style={{marginTop:'1em'} }>
             <Switch >
                 <Route exact path={path}>
                     <h3>Home</h3>
