@@ -1,7 +1,7 @@
-# <span style="font-family:calibry ; color: darkblue"> **Document Tracking System for Faculty of Engineering University of Ruhuna** </span>
+# **Document Tracking System for Faculty of Engineering University of Ruhuna**
 ***
 
-## **Version**
+### **Version**
 * 1.0
 
 This is a document tracking platform important for management of an organization. Different users in this system can access the system via different authentication levels, manage internal and external the documents and monitor the documentation process flow through their authentication level.
