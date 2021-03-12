@@ -19,7 +19,7 @@ This product can manage the documents and some application forms which need to b
 
 ### **Contributors**
 
-* Mr. J.K.A.J.Kavinda
+* Mr. J.K.A.J. Kavinda
 * Mr. D.M.G. Rohana
 * Mr. T.W.G.S. Pramod
 * Miss. S.M.A.T. Subasighe
