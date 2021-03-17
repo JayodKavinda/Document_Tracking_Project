@@ -10,8 +10,8 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20210212075007_AddRisogrphForm")]
-    partial class AddRisogrphForm
+    [Migration("20210302071606_initNewdb")]
+    partial class initNewdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,29 +42,29 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a0521ba-5b14-4adc-b985-abaefc52536f",
-                            ConcurrencyStamp = "611c4b85-42f6-486f-b666-9cc3a37d2ec5",
+                            Id = "97a5f1ce-5ee2-4b58-802b-b70f4165c9a5",
+                            ConcurrencyStamp = "5bf6109f-41b0-46b8-b5d4-c728f53bcf8d",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "bbb5ae01-96b4-4cb4-8387-cc51aeb2a5d6",
-                            ConcurrencyStamp = "ac7f5305-1528-4a89-a314-5aa22ad6bfea",
+                            Id = "9212d597-e2b1-49a5-b14c-c2a3bdec5429",
+                            ConcurrencyStamp = "1bee5a99-aa0b-460e-8f8b-6a05896123e7",
                             Name = "Dean",
                             NormalizedName = "DEAN"
                         },
                         new
                         {
-                            Id = "0ad24672-f6a2-4adf-a88c-336564f160c8",
-                            ConcurrencyStamp = "39dcb269-ab15-4bd8-a14f-2af70f612668",
+                            Id = "a0a701ad-cb14-41c0-907f-b8867e3eadd4",
+                            ConcurrencyStamp = "1cc3451f-234b-4e6a-81d9-d306e27a5612",
                             Name = "Hod",
                             NormalizedName = "HOD"
                         },
                         new
                         {
-                            Id = "e44c53e1-65e6-4f4f-9d4c-c4357be5e3d8",
-                            ConcurrencyStamp = "0faf9bd5-a837-46a6-b0a0-f954aa41a345",
+                            Id = "408550ae-c657-47c4-98d2-96c2da49fb4f",
+                            ConcurrencyStamp = "1f8986cb-18df-4c8b-bf33-d5bad3bc1f0e",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -90,28 +90,46 @@ namespace WebAPI.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CopyCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("CopyTo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DocTitle")
+                    b.Property<string>("DocumentTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DueDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FinalLevelUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FinalUserDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FormModelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PageCount")
+                    b.Property<string>("FormModelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InitDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumberOfCopies")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfPage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaperProvided")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Purpose")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SizeOfCopies")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeacherName")
@@ -120,49 +138,11 @@ namespace WebAPI.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("isProvided")
-                        .HasColumnType("bit");
-
                     b.HasKey("RisograghFormId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("RisograghForm");
-                });
-
-            modelBuilder.Entity("WebAPI.Models.Form.VehicleReservationForm", b =>
-                {
-                    b.Property<int>("VehicleReservationFormId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("EstimateDistance")
-                        .HasColumnType("float");
-
-                    b.Property<string>("EstimateTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FormModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FromRoute")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToRoute")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("VehicleReservationFormId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("VehicleReservationForms");
                 });
 
             modelBuilder.Entity("WebAPI.Models.UserModel.User", b =>
@@ -239,18 +219,9 @@ namespace WebAPI.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Form.VehicleReservationForm", b =>
-                {
-                    b.HasOne("WebAPI.Models.UserModel.User", null)
-                        .WithMany("VehicleReservationForms")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("WebAPI.Models.UserModel.User", b =>
                 {
                     b.Navigation("RisograghForms");
-
-                    b.Navigation("VehicleReservationForms");
                 });
 #pragma warning restore 612, 618
         }

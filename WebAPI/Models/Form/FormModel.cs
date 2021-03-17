@@ -12,7 +12,9 @@ namespace WebAPI.Models.Form
         public int FormModelId { get; set; }
       
         public string UserId { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime InitDateTime { get; set; }
+
+        public string FormModelName { get; set; }
 
 
     }

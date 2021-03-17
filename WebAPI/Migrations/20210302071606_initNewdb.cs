@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
 {
-    public partial class newInit : Migration
+    public partial class initNewdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,24 +64,33 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VehicleReservationForms",
+                name: "RisograghForm",
                 columns: table => new
                 {
-                    VehicleReservationFormId = table.Column<int>(type: "int", nullable: false)
+                    RisograghFormId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromRoute = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ToRoute = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EstimateTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EstimateDistance = table.Column<double>(type: "float", nullable: false),
+                    DocumentTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeacherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberOfPage = table.Column<int>(type: "int", nullable: false),
+                    NumberOfCopies = table.Column<int>(type: "int", nullable: false),
+                    SizeOfCopies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Purpose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaperProvided = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CopyTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DueDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FinalLevelUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FormStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FinalUserDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FormModelId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InitDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FormModelName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleReservationForms", x => x.VehicleReservationFormId);
+                    table.PrimaryKey("PK_RisograghForm", x => x.RisograghFormId);
                     table.ForeignKey(
-                        name: "FK_VehicleReservationForms_Users_UserId",
+                        name: "FK_RisograghForm_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -93,15 +102,15 @@ namespace WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b365bf7e-8ae7-4330-b307-5be74274e297", "d7fbdc24-099a-47c3-a40a-3ff205a3af32", "Visitor", "VISITOR" },
-                    { "065cfccf-18f1-4e40-ac2d-2a534d69089e", "06672b28-5677-4022-b38d-0f5dff46e734", "Dean", "DEAN" },
-                    { "764c3ca0-1e9a-48fb-82e2-20fcfe4a4034", "ebb43f84-f8ce-4371-94cc-8fe15817eb08", "Hod", "HOD" },
-                    { "28ff1c7f-5486-4eaf-9190-aa5840a7e574", "0d293191-0655-4558-9b1f-dc71179b5cd4", "Administrator", "ADMINISTRATOR" }
+                    { "97a5f1ce-5ee2-4b58-802b-b70f4165c9a5", "5bf6109f-41b0-46b8-b5d4-c728f53bcf8d", "Visitor", "VISITOR" },
+                    { "9212d597-e2b1-49a5-b14c-c2a3bdec5429", "1bee5a99-aa0b-460e-8f8b-6a05896123e7", "Dean", "DEAN" },
+                    { "a0a701ad-cb14-41c0-907f-b8867e3eadd4", "1cc3451f-234b-4e6a-81d9-d306e27a5612", "Hod", "HOD" },
+                    { "408550ae-c657-47c4-98d2-96c2da49fb4f", "1f8986cb-18df-4c8b-bf33-d5bad3bc1f0e", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_VehicleReservationForms_UserId",
-                table: "VehicleReservationForms",
+                name: "IX_RisograghForm_UserId",
+                table: "RisograghForm",
                 column: "UserId");
         }
 
@@ -114,7 +123,7 @@ namespace WebAPI.Migrations
                 name: "IdentityUserRole<string>");
 
             migrationBuilder.DropTable(
-                name: "VehicleReservationForms");
+                name: "RisograghForm");
 
             migrationBuilder.DropTable(
                 name: "Users");
