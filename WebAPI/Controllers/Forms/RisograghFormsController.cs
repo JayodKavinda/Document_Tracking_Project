@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace WebAPI.Controllers.Forms
 
         // POST: api/RisograghForms
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<RisograghForm>> PostRisograghForm(RisograghForm risograghForm)
         {
@@ -35,12 +36,19 @@ namespace WebAPI.Controllers.Forms
 
 
         // GET: api/RisograghForms -> get all forms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm(String id)
+        /*[HttpGet]
+        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm()
         {
-            return await _context.RisograghForm.Where(x => x.UserId == id).ToListAsync();
+            return await _context.RisograghForm.ToListAsync();
+        }*/
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm(string id)
+        {
+            return await _context.RisograghForm.Where(x=> x.UserId == id).ToListAsync();
         }
 
+        [Authorize]
         [Route("inbox")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RisograghForm>>> GetInboxRisograghForm(string id)
@@ -62,9 +70,10 @@ namespace WebAPI.Controllers.Forms
             return risograghForm;
         }
 
-        // PUT: api/RisograghForms/5  
+        // PUT: api/RisograghForms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+     
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRisograghForm(int id, RisograghForm risograghForm)
         {
@@ -94,7 +103,7 @@ namespace WebAPI.Controllers.Forms
             return NoContent();
         }
 
-
+       
         // DELETE: api/RisograghForms/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RisograghForm>> DeleteRisograghForm(int id)

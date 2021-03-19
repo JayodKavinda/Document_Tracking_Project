@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,9 +21,10 @@ namespace WebAPI.Models.Form
         public string CopyTo { get; set; }
         public DateTime DueDateTime { get; set; }
 
-        //Next level user
+        //Next level uuser
         public string FinalLevelUser { get; set; }
         public string FormStatus { get; set; }
         public DateTime FinalUserDateTime { get; set; }
+
     }
 }

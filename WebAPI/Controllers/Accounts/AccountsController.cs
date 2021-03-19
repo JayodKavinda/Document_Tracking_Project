@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -45,6 +45,7 @@ namespace WebAPI.Controllers.Accounts
         {
             return "Document Tracking System";
         }
+
         class SystemUser
         {
             public string Email { get; set; }
@@ -73,12 +74,15 @@ namespace WebAPI.Controllers.Accounts
 
             SystemUser systemUser = new SystemUser();
 
-            systemUser.Email = user.Email;
-            systemUser.FirstName = user.FirstName;
-            systemUser.UserId = user.Id;
+
+           
 
             if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
             {
+
+                systemUser.Email = user.Email;
+                systemUser.FirstName = user.FirstName;
+                systemUser.UserId = user.Id;
                 //JWT Athentication
                 var signingCredentials = GetSigningCredentials();
                 var claims = GetClaims(user);
@@ -88,10 +92,43 @@ namespace WebAPI.Controllers.Accounts
                 systemUser.Token = token;
                 return Ok(systemUser);
 
-
+               
             }
             return Unauthorized("Invalid Authentication");
 
+        }
+        class CurrentUser
+        {
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            public string Department { get; set; }
+
+            public string Designation { get; set; }
+
+        }
+
+        [HttpGet("Current")]  // api/Accounts/Current
+        public async Task<IActionResult> Current(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if(user != null)
+            {
+                CurrentUser currentUser = new CurrentUser();
+                currentUser.Email = user.Email;
+                currentUser.Department = user.Department;
+                currentUser.FirstName = user.FirstName;
+                currentUser.LastName = user.LastName;
+                
+
+                return Ok(currentUser);
+
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         //JWT functions
