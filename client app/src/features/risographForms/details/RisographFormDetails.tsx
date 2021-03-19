@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, {  useContext, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Button, Card, Container, Header, Icon } from 'semantic-ui-react'
+import { Button, Card, Container, Header, Icon, Step } from 'semantic-ui-react'
 import LoadingComponent from '../../../app/layout/LoadingComponent'
 import { RootStoreContext } from '../../../app/stores/rootStore'
 
@@ -66,6 +66,36 @@ interface DetailParams{
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
+
+        <Step.Group  fluid>
+          <Step >
+          <Icon name='check' color='green'/>
+            <Step.Content>
+              <Step.Title>Level 1: Submission</Step.Title>
+              <Step.Description>You requested Risograph Copies <br/>Form id: {risographForm.risograghFormId}</Step.Description>
+            </Step.Content>
+          </Step>
+
+          <Step >
+            {risographForm.formStatus==='Approved'&&
+            <Icon name='check' color='green'/>
+            }
+            {risographForm.formStatus==='Pending'&&
+            <Icon name='hourglass half' color='orange'/>
+            }
+          
+            <Step.Content>
+              <Step.Title>Final level: {risographForm.formStatus}</Step.Title>
+              <Step.Description>Approval of Head of the Department</Step.Description>
+            </Step.Content>
+          </Step>
+
+          <Step active>
+            <Step.Content>
+              <Step.Title>Print the Document</Step.Title>
+            </Step.Content>
+          </Step>
+        </Step.Group>
           
         </Card.Content>
       </Card>

@@ -3,7 +3,7 @@ import { IRisographForm } from '../models/risographForm';
 import { IUser, IUserForm } from '../models/user';
 
 
-axios.defaults.baseURL = 'https://localhost:44374/api';
+axios.defaults.baseURL = 'https://localhost:5001/api';
 
 
 axios.interceptors.request.use((config)=>{
