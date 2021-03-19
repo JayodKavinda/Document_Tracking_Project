@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -74,12 +74,15 @@ namespace WebAPI.Controllers.Accounts
 
             SystemUser systemUser = new SystemUser();
 
-            systemUser.Email = user.Email;
-            systemUser.FirstName = user.FirstName;
-            systemUser.UserId = user.Id;
+
+           
 
             if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
             {
+
+                systemUser.Email = user.Email;
+                systemUser.FirstName = user.FirstName;
+                systemUser.UserId = user.Id;
                 //JWT Athentication
                 var signingCredentials = GetSigningCredentials();
                 var claims = GetClaims(user);
