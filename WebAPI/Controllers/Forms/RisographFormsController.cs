@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,11 @@ namespace WebAPI.Controllers.Forms
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RisograghFormsController : ControllerBase
+    public class RisographFormsController : ControllerBase
     {
         private readonly DBContext _context;
 
-        public RisograghFormsController(DBContext context)
+        public RisographFormsController(DBContext context)
         {
             _context = context;
         }
@@ -38,14 +39,14 @@ namespace WebAPI.Controllers.Forms
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RisograghForm>>> GetRisograghForm(String id)
         {
-            return await _context.RisograghForm.Where(x => x.UserId == id).ToListAsync();
+            return await _context.RisograghForm.Where(x => x.UserId == id).ToListAsync(); //get forms that related with user id
         }
 
         [Route("inbox")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RisograghForm>>> GetInboxRisograghForm(string id)
         {
-            return await _context.RisograghForm.Where(x => x.FinalLevelUser == id).ToListAsync();
+            return await _context.RisograghForm.Where(x => x.FinalLevelUser == id).ToListAsync(); //get forms sent to final level user
         }
 
         // GET: api/RisograghForms/5 -> get spesific form with id

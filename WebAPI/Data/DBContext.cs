@@ -17,14 +17,13 @@ namespace WebAPI.Data
         {
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
         }
-
+        //Code First approch
         public DbSet<User> Users { get; set; }
 
         public DbSet<VehicleReservationForm> VehicleReservationForms { get; set; }

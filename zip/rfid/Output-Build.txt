@@ -1,0 +1,35 @@
+﻿------ Build started: Project: Group5, Configuration: Debug AVR ------
+Build started.
+Project "Group5.cproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "D:\Atmel Studio\7.0\Vs\Compiler.targets" from project "C:\Users\Hp\Desktop\Jayod\zip\rfid\rfid\Group5.cproj" (target "Build" depends on it):
+	Using "RunCompilerTask" task from assembly "D:\Atmel Studio\7.0\Extensions\Application\AvrGCC.dll".
+	Task "RunCompilerTask"
+		Shell Utils Path D:\Atmel Studio\7.0\shellUtils
+		D:\Atmel Studio\7.0\shellUtils\make.exe all --jobs 4 --output-sync 
+		Building target: Group5.elf
+		Invoking: AVR/GNU Linker : 5.4.0
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe" -o Group5.elf  main.o   -Wl,-Map="Group5.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega328p -B "D:\Atmel Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega328p"  
+		Finished building target: Group5.elf
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Group5.elf" "Group5.hex"
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Group5.elf" "Group5.eep" || exit 0
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Group5.elf" > "Group5.lss"
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Group5.elf" "Group5.srec"
+		"D:\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Group5.elf"
+		   text	   data	    bss	    dec	    hex	filename
+		   1728	     70	      0	   1798	    706	Group5.elf
+	Done executing task "RunCompilerTask".
+	Using "RunOutputFileVerifyTask" task from assembly "D:\Atmel Studio\7.0\Extensions\Application\AvrGCC.dll".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	1798 bytes   5.5 % Full
+				Data Memory Usage 		:	70 bytes   3.4 % Full
+				Warning: Memory Usage estimation may not be accurate if there are sections other than .text sections in ELF file
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "Group5.cproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "D:\Atmel Studio\7.0\Vs\Avr.common.targets" from project "C:\Users\Hp\Desktop\Jayod\zip\rfid\rfid\Group5.cproj" (entry point):
+Done building target "Build" in project "Group5.cproj".
+Done building project "Group5.cproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

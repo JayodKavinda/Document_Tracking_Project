@@ -46,8 +46,8 @@ namespace WebAPI
             services.Configure<IdentityOptions>(options =>
             {
              
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = true; //strong password
+                options.Password.RequireUppercase = true;
             });
 
             // Auto Mapper Configurations

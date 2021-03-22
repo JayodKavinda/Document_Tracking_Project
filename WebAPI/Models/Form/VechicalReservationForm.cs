@@ -14,5 +14,10 @@ namespace WebAPI.Models.Form
         public string EstimateTime { get; set; }
 
         public double EstimateDistance { get; set; }
+
+        //Next level user
+        public string FinalLevelUser { get; set; }
+        public string FormStatus { get; set; }
+        public DateTime FinalUserDateTime { get; set; }
     }
 }

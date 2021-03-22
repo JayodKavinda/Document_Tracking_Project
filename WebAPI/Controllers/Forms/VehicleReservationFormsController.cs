@@ -35,9 +35,9 @@ namespace WebAPI.Controllers.Forms
 
         // GET: api/VehicleReservationForms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VehicleReservationForm>>> GetVehicleReservationForms()
+        public async Task<ActionResult<IEnumerable<VehicleReservationForm>>> GetVehicleReservationForms(String id)
         {
-            return await _context.VehicleReservationForms.ToListAsync();
+            return await _context.VehicleReservationForms.Where(x => x.UserId == id).ToListAsync();
         }
 
         // GET: api/VehicleReservationForms/5

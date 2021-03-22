@@ -87,15 +87,44 @@ namespace WebAPI.Controllers.Accounts
 
                 systemUser.Token = token;
                 return Ok(systemUser);
-
-
             }
             return Unauthorized("Invalid Authentication");
+        }
+
+        class CurrentUser 
+        {
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            public string Department { get; set; }
+
+            public string Designation { get; set; }
 
         }
 
+        [HttpGet("Current")]  // api/Accounts/Current
+        public async Task<IActionResult> Current(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                CurrentUser currentUser = new CurrentUser();
+                currentUser.Email = user.Email;
+                currentUser.Department = user.Department;
+                currentUser.FirstName = user.FirstName;
+                currentUser.LastName = user.LastName;
+
+                return Ok(currentUser);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         //JWT functions
-         private SigningCredentials GetSigningCredentials()
+        private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
             var secret = new SymmetricSecurityKey(key);
@@ -115,8 +144,6 @@ namespace WebAPI.Controllers.Accounts
             return tokenOptions;
         }
 
-
-        
         private async Task<List<Claim>> GetClaims(User user)
         {
             var claims = new List<Claim>
