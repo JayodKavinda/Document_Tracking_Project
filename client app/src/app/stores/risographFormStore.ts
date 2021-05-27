@@ -36,11 +36,15 @@ export default class RisographFormStore{
                     this.risographForms.push(risograhForm)
                 })
             })
+        }).catch((err)=>{
+            throw err;
         }).finally(()=>
         runInAction(()=>{
             this.loadingInitial=false
         }));
     }
+
+    
 
     @action loadInboxRisographForms= (id:string|null)=>{
         this.loadingInitial=true;
@@ -71,8 +75,9 @@ export default class RisographFormStore{
                 this.submitting=false
                 
             })).then(()=>{
-                history.push('/dashboard')
-               // this.rootStore.modalStore.openModal('tets');
+                this.rootStore.modalStore.openModal("Ok")
+               // history.push('/dashboard')
+               
             })
           
 
@@ -97,19 +102,44 @@ export default class RisographFormStore{
 
     }
 
-    @action loadRisographform = (id: number)=>{
+    // @action loadRisographform = (id: number)=>{
+    //     let risographForm = this.getRisographForm(id);
+    //     if(risographForm){
+    //         this.selectedRisographForm=risographForm;
+    //     }else{
+    //         this.loadingInitial =true;
+    //         agent.RisographForms.details(id)
+    //         .then((response)=>{
+    //             runInAction(()=>{
+    //                 this.selectedRisographForm = response;
+    //                 this.loadingInitial =false;
+    //             })
+    //         })
+         
+    //     }
+    // }
+
+    
+    @action loadRisographform = async (id: number)=>{
         let risographForm = this.getRisographForm(id);
         if(risographForm){
             this.selectedRisographForm=risographForm;
         }else{
             this.loadingInitial =true;
-            agent.RisographForms.details(id)
-            .then((response)=>{
+            try{
+                risographForm = await agent.RisographForms.details(id);
                 runInAction(()=>{
-                    this.selectedRisographForm = response;
+                    this.selectedRisographForm = risographForm;
                     this.loadingInitial =false;
                 })
-            })
+            } catch(error){
+                runInAction(()=>{
+                    this.loadingInitial= false;
+                })
+               console.log(error)
+            }
+           
+           
          
         }
     }

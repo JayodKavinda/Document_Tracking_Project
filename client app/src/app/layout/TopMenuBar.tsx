@@ -8,7 +8,7 @@ export const TopMenuBar = () => {
   let {  url } = useRouteMatch();
     return (
         <div>
-        <Menu pointing>
+        <Menu  pointing>
           <Menu.Item
             name='Home'
             as ={NavLink} exact to={`${url}`}

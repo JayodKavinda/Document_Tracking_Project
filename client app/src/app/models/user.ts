@@ -10,3 +10,13 @@ export interface IUserForm {
     password : string
     
 }
+
+export interface ICurrentUser {
+    email: string
+    firstName : string
+    lastName : string
+    department : string
+    designation: string
+    
+}
+

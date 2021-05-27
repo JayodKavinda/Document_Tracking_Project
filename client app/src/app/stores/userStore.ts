@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { act } from "react-dom/test-utils";
 import { history } from "../..";
 import agent from "../api/agent";
-import { IUser, IUserForm } from "../models/user";
+import { ICurrentUser, IUser, IUserForm } from "../models/user";
 import { RootStore } from "./rootStore";
 
 export default class UserStore{
@@ -13,13 +13,15 @@ export default class UserStore{
         // for new Mobx version
         makeObservable(this);
         this.rootStore = rootStore;
-      }
+    }
+
     @observable user: IUser | null= null;
+    @observable currentUser: ICurrentUser | null= null;
 
   
 
 
-    @computed get isLoggedIn() {return !!this.user}
+    @computed get isLoggedIn() {return !!this.currentUser}
 
     @action login = async(values : IUserForm)=>{
         try {
@@ -30,21 +32,24 @@ export default class UserStore{
             //console.log(user)
             this.rootStore.commonStore.setToken(user.token);
             this.rootStore.commonStore.setUserId(user.userId);
-            history.push('/dashboard')
+            this.rootStore.modalStore.closeModal();
+            history.push('/dashboard');
            
         } catch (error) {
            throw error;
         }
     }
 
-    @action getUser = async ()=>{
+    @action getUser = async (id:string|null)=>{
         try {
-            const user = await agent.User.current();
+            const currUser = await agent.User.current(id);
             runInAction(()=>{
-                this.user =user;
+                this.currentUser =currUser;
+                console.log(currUser)
             })
+          
         } catch (error) {
-            console.log(error)
+           // console.log(error)
         }
     }
 
@@ -52,6 +57,8 @@ export default class UserStore{
         this.rootStore.commonStore.setToken(null);
         this.rootStore.commonStore.setUserId(null);
         this.user =null;
+        this.currentUser = null;
         history.push('/')
+        
     }
 }
