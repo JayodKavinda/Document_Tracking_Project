@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210524151755_AddVehicalFrom")]
+    partial class AddVehicalFrom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,29 +42,29 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e327006-dcac-467b-aaaf-c615f58ad6a5",
-                            ConcurrencyStamp = "de6a2afc-e8fd-404d-bdf0-7cc12bf12fda",
+                            Id = "606265c8-5dc8-413a-a7fe-208caac5036d",
+                            ConcurrencyStamp = "e649cd83-dc0f-497c-ad31-d256b9152daa",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "8409702e-786f-4a06-b57d-066dc2d57d95",
-                            ConcurrencyStamp = "274490e7-0720-4e76-8e53-aa182a8a5e61",
+                            Id = "0d06112c-5347-4af9-8d0e-c353aee238e2",
+                            ConcurrencyStamp = "b723094f-68db-48df-8037-32e54ab7b858",
                             Name = "Dean",
                             NormalizedName = "DEAN"
                         },
                         new
                         {
-                            Id = "f09fb2a5-4fbc-4540-b23b-21ade83aef90",
-                            ConcurrencyStamp = "e7581abf-6f4f-4b3e-8bac-5cc1c901cc8e",
+                            Id = "3d4328c7-d742-4a67-a36f-724e6d067504",
+                            ConcurrencyStamp = "487084a2-aecd-411d-8903-d007c048cdf6",
                             Name = "Hod",
                             NormalizedName = "HOD"
                         },
                         new
                         {
-                            Id = "f48ee1bc-b4b4-40d3-82fd-c3347cbeccaf",
-                            ConcurrencyStamp = "731ba90a-8ca6-4220-ab08-428b0f6f54cc",
+                            Id = "d7f0e397-66d8-40f9-b8f4-240986c2b4f4",
+                            ConcurrencyStamp = "587e01bc-0a89-4720-96b4-98b21d41cf78",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -149,9 +151,6 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<string>("Applicant")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");

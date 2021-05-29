@@ -27,7 +27,8 @@ namespace WebAPI.Data
 
         public DbSet<User> Users { get; set; }
 
-       
+        public DbSet<VehicalReservationForm> VehicalReservationForms { get; set; }
+
 
         public DbSet<RisograghForm> RisograghForm { get; set; }
     }

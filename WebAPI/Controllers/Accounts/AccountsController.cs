@@ -74,12 +74,15 @@ namespace WebAPI.Controllers.Accounts
 
             SystemUser systemUser = new SystemUser();
 
-            systemUser.Email = user.Email;
-            systemUser.FirstName = user.FirstName;
-            systemUser.UserId = user.Id;
+
+           
 
             if (user != null && await _userManager.CheckPasswordAsync(user, userModel.Password))
             {
+
+                systemUser.Email = user.Email;
+                systemUser.FirstName = user.FirstName;
+                systemUser.UserId = user.Id;
                 //JWT Athentication
                 var signingCredentials = GetSigningCredentials();
                 var claims = GetClaims(user);
@@ -117,6 +120,7 @@ namespace WebAPI.Controllers.Accounts
                 currentUser.Department = user.Department;
                 currentUser.FirstName = user.FirstName;
                 currentUser.LastName = user.LastName;
+                currentUser.Designation = user.Designation;
                 
 
                 return Ok(currentUser);
