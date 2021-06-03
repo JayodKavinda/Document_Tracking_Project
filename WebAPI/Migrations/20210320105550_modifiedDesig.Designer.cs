@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210320105550_modifiedDesig")]
+    partial class modifiedDesig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,29 +42,29 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e327006-dcac-467b-aaaf-c615f58ad6a5",
-                            ConcurrencyStamp = "de6a2afc-e8fd-404d-bdf0-7cc12bf12fda",
+                            Id = "15e979e0-04b1-4233-aa13-2ddc9be42086",
+                            ConcurrencyStamp = "5b09d3c1-b7b3-458a-b4f2-59b7f7cd4376",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "8409702e-786f-4a06-b57d-066dc2d57d95",
-                            ConcurrencyStamp = "274490e7-0720-4e76-8e53-aa182a8a5e61",
+                            Id = "238cd17b-aeff-46a7-a561-4312650fdd6c",
+                            ConcurrencyStamp = "6c1764ff-5437-4ca5-8e9d-7d144ea0c860",
                             Name = "Dean",
                             NormalizedName = "DEAN"
                         },
                         new
                         {
-                            Id = "f09fb2a5-4fbc-4540-b23b-21ade83aef90",
-                            ConcurrencyStamp = "e7581abf-6f4f-4b3e-8bac-5cc1c901cc8e",
+                            Id = "34e9dac8-9679-4223-b565-103072b90f4b",
+                            ConcurrencyStamp = "cee49e26-639b-4de3-8ebe-30c86062a86e",
                             Name = "Hod",
                             NormalizedName = "HOD"
                         },
                         new
                         {
-                            Id = "f48ee1bc-b4b4-40d3-82fd-c3347cbeccaf",
-                            ConcurrencyStamp = "731ba90a-8ca6-4220-ab08-428b0f6f54cc",
+                            Id = "f2bc9a00-8add-42c0-a807-77ccd855ea20",
+                            ConcurrencyStamp = "ccc48cd1-1ae6-4511-a902-4e45952f4c84",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -143,107 +145,6 @@ namespace WebAPI.Migrations
                     b.ToTable("RisograghForm");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Form.VehicalReservationForm", b =>
-                {
-                    b.Property<int>("VehicalReservationFormId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Applicant")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Department")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DueDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EstimateDistance")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EstimateTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FormCurrentLevel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FormModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FormModelName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FormStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InitDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IsVehicalOK")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Level2UserDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Level2UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Level3UserDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Level3UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Level4UserDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Level4UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Officers")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjectNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Purpose")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReturnFrom")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReturnTo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RouteFrom")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RouteTo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Vote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("isLevel2Approved")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("isLevel3Approved")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("isLevel4Approved")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VehicalReservationFormId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("VehicalReservationForms");
-                });
-
             modelBuilder.Entity("WebAPI.Models.UserModel.User", b =>
                 {
                     b.Property<string>("Id")
@@ -318,18 +219,9 @@ namespace WebAPI.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Form.VehicalReservationForm", b =>
-                {
-                    b.HasOne("WebAPI.Models.UserModel.User", null)
-                        .WithMany("VehicleReservationForms")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("WebAPI.Models.UserModel.User", b =>
                 {
                     b.Navigation("RisograghForms");
-
-                    b.Navigation("VehicleReservationForms");
                 });
 #pragma warning restore 612, 618
         }

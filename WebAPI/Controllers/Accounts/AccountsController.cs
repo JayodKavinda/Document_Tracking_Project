@@ -120,6 +120,7 @@ namespace WebAPI.Controllers.Accounts
                 currentUser.Department = user.Department;
                 currentUser.FirstName = user.FirstName;
                 currentUser.LastName = user.LastName;
+                currentUser.Designation = user.Designation;
                 
 
                 return Ok(currentUser);
