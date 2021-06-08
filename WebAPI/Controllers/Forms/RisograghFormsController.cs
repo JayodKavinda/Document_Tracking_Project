@@ -57,6 +57,7 @@ namespace WebAPI.Controllers.Forms
         }
 
         // GET: api/RisograghForms/5 -> get spesific form with id
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<RisograghForm>> GetRisograghForm(int id)
         {
@@ -73,7 +74,7 @@ namespace WebAPI.Controllers.Forms
         // PUT: api/RisograghForms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-     
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRisograghForm(int id, RisograghForm risograghForm)
         {
@@ -103,8 +104,9 @@ namespace WebAPI.Controllers.Forms
             return NoContent();
         }
 
-       
+
         // DELETE: api/RisograghForms/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<RisograghForm>> DeleteRisograghForm(int id)
         {

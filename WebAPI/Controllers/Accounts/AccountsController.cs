@@ -132,8 +132,35 @@ namespace WebAPI.Controllers.Accounts
             }
         }
 
+        //[Authorize]
+        [HttpPost("PasswordUpdate")]  // api/Accounts/PasswordUpdate
+        public async Task<IActionResult> UpdatePassengerPassword(UserPasswordUpdate userModel)
+        {
+            var user = await _userManager.FindByEmailAsync(userModel.Email);
+            //var user = db.Users.Where(x => x.BusNo == userModel.BusNo).FirstOrDefault();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, userModel.NewPassword);
+
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return Ok(result.Errors);
+            }
+
+            return StatusCode(201);
+        }
+
+
+
         //JWT functions
-         private SigningCredentials GetSigningCredentials()
+        private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
             var secret = new SymmetricSecurityKey(key);
