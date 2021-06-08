@@ -1,9 +1,13 @@
 import axios, { AxiosResponse }  from 'axios';
+import { history } from '../..';
 import { IRisographForm } from '../models/risographForm';
-import { IUser, IUserForm } from '../models/user';
+import { IVehicalReservationForm } from '../models/vehicalReservationForm';
+import { ICurrentUser, IPasswaordChange, IUser, IUserForm } from '../models/user';
 
+var flag= false;
 
 axios.defaults.baseURL = 'https://localhost:5001/api';
+//axios.defaults.baseURL = 'https://dtsruhuna.azurewebsites.net/api'
 
 
 axios.interceptors.request.use((config)=>{
@@ -14,8 +18,18 @@ axios.interceptors.request.use((config)=>{
     return Promise.reject(error)
 })
 
+
 axios.interceptors.response.use(undefined, error =>{
+    if(error.response.status===404 && !flag){
+        history.push('/notfound')
+    }else if(error.response.status===401){
+        history.push('/unatherized')
+        flag=true;
+    }
+    console.log(error.response)
     throw error.response
+    
+    
     //console.log(error.response);
 })
 
@@ -40,10 +54,20 @@ const RisographForms ={
     listInbox:(id:string|null): Promise<IRisographForm[]>=> requests.get(`/RisograghForms/inbox?id=${id}`)  //get all
 }
 
-const User = {
-    current:(): Promise<IUser> => requests.get('/accounts'),
-    login:(user : IUserForm) : Promise<IUser> => requests.post('accounts/login', user),
-    register:(user : IUserForm) : Promise<IUser> => requests.post('accounts/register', user)
+const VehicalReservationForms ={ 
+    list:(): Promise<IVehicalReservationForm[]>=> requests.get('/VehicalReservationForms'),  //get all
+    listWithId:(id:string|null): Promise<IVehicalReservationForm[]>=> requests.get(`/VehicalReservationForms?id=${id}`),  //get all
+    details:(id:number)=> requests.get(`/VehicalReservationForms/${id}`),              //get one
+    create:(vehicalReservationForm:IVehicalReservationForm)=> requests.post(`/VehicalReservationForms/`,vehicalReservationForm),      //post
+    update: (vehicalReservationForm:IVehicalReservationForm) => requests.put(`/VehicalReservationForms/${vehicalReservationForm.vehicalReservationFormId}`, vehicalReservationForm),
+    listInbox:(id:string|null): Promise<IVehicalReservationForm[]>=> requests.get(`/VehicalReservationForms/inbox?id=${id}`)  //get all
 }
 
-export default {RisographForms, User}
+const User = {
+    current:(id:string|null): Promise<ICurrentUser| null> => requests.get(`/accounts/current?id=${id}`),
+    login:(user : IUserForm) : Promise<IUser> => requests.post('accounts/login', user),
+    register:(user : IUserForm) : Promise<IUser> => requests.post('accounts/register', user),
+    changePassword: (password: IPasswaordChange):Promise<IPasswaordChange> => requests.post('/Accounts/PasswordUpdate', password)
+}
+
+export default {RisographForms, User,VehicalReservationForms }

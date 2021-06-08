@@ -1,9 +1,10 @@
 import { RootStore } from "./rootStore";
-import { observable, action } from "mobx";
+import { observable, action, makeObservable } from "mobx";
 
 export default class ModalStore {
     rootStore: RootStore;
     constructor(rootStore: RootStore) {
+        makeObservable(this);
         this.rootStore = rootStore;
     }
 

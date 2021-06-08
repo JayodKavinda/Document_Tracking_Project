@@ -12,12 +12,12 @@ const RisographFormList:React.FC = () => {
     const{inboxRisographForms} = rootStore.risographFormStore;
 
     return (
-        <Segment clearing  style={{marginRight : '20px',background:'Moccasin'}}  >
+        <Segment clearing  >
         <Item.Group divided>
             {inboxRisographForms.map(risographForm =>(
                 <Item key ={risographForm.risograghFormId}>
                 <Item.Content>
-                <Item.Header as='a'>New Application - Approval pending application by Jayod</Item.Header>
+                <Item.Header as='a'>New Application - Approval pending application by Mr.{risographForm.teacherName}</Item.Header>
                 <Item.Meta>Title of the Document: {risographForm.documentTitle}</Item.Meta>
                 <Item.Description>
                     <div >
@@ -30,7 +30,7 @@ const RisographFormList:React.FC = () => {
                     <Label  style={{background:'LightGreen'}} basic content={risographForm.formStatus} />
                 </Item.Extra>
                
-                <Button fluid as = {Link} to={`/risographForms/manage/${risographForm.risograghFormId}`}  content='View Application' color='orange'></Button>
+                <Button fluid as = {Link} to={`/risographForms/manage/${risographForm.risograghFormId}`}  content='Review Application' color='orange'></Button>
                 </Item.Content>
                 </Item>
             ))}

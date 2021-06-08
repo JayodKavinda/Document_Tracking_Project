@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, {  useContext, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Button, Card, Container, Header, Icon, Step } from 'semantic-ui-react'
+import { Button, Card, Container, Header, Icon, Label, Step } from 'semantic-ui-react'
 import LoadingComponent from '../../../app/layout/LoadingComponent'
 import { RootStoreContext } from '../../../app/stores/rootStore'
 
@@ -16,7 +16,7 @@ interface DetailParams{
 
     useEffect(()=>{
       loadRisographform(+match.params.id)
-    },[loadRisographform])
+    },[loadRisographform,match.params.id])
    
     if(loadingInitial || !risographForm) return <LoadingComponent content ='Loading activity..'/>
 
@@ -45,12 +45,27 @@ interface DetailParams{
             <h4>Due date and time:   {risographForm!.dueDateTime} </h4>
           </Card.Description>
         </Card.Content>
+        
         <Card.Content extra>
-              <Button  floated='right' onClick={()=> history.push('/dashboard/forms')} basic color='grey' content = 'Back to dashboard' />
+              <Button  floated='left' onClick={()=> history.push('/dashboard/forms')} basic color='grey' content = 'Back to dashboard' />
+              {risographForm.formStatus === 'Pending' && 
+              <Button  floated='right' icon labelPosition='left' onClick={()=> history.push('/dashboard/forms')}  color='red'>  <Icon name='arrow circle right' /> Cancel Request</Button>
+              }
+          
           
         </Card.Content>
-      </Card>
 
+       
+      </Card>
+      
+      {risographForm.formStatus === 'Approved' && 
+      <Card.Content>
+      <Label  basic color='green' size='large' >Your application Request Risogrph Copies has been {risographForm.formStatus}</Label>
+      <Button  floated='right' icon labelPosition='left'   color='green'>  <Icon name='print' /> Print PDF Document</Button>
+      </Card.Content>
+      
+      }
+      
       <Card fluid>
         
         <Card.Content>
@@ -61,7 +76,7 @@ interface DetailParams{
           <Card.Description>
           <a>
             <Icon name='user' color ='orange' />
-           Pending for approval
+           Apllicaion Current State: {risographForm!.formStatus}
           </a>
           </Card.Description>
         </Card.Content>
@@ -96,14 +111,12 @@ interface DetailParams{
             </Step.Content>
           </Step>
         </Step.Group>
-          
+
+        
         </Card.Content>
       </Card>
       </Container>
-        
-
       
-
 
     )
 }

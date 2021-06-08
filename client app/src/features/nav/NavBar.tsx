@@ -4,13 +4,13 @@ import {  Link, NavLink } from 'react-router-dom'
 import { Button, Container, Dropdown, Icon, Image, Menu, Popup } from 'semantic-ui-react'
 import { RootStoreContext } from '../../app/stores/rootStore'
 
+
 const NavBar: React.FC =() => {
         const rootStore = useContext(RootStoreContext);
-        const{ user, logout} = rootStore.userStore
-       
-
+        const{ user, logout, currentUser} = rootStore.userStore
+        
     return (
-        <Menu fixed = 'top' inverted>
+        <Menu fixed = 'top' inverted stackable>
 
         <Container fluid>
         <Menu.Item header as ={NavLink} exact to ='/'>
@@ -23,18 +23,18 @@ const NavBar: React.FC =() => {
         />
         <Menu.Item>
         <Popup content='Add a new Document' trigger={
-        <Button  as ={NavLink} to ='/createDoc' positive icon labelPosition='left'>
+        <Button as ={NavLink} to ='/createDoc'  positive icon labelPosition='left'>
             <Icon name='plus' />
         Create New Document
         </Button>} />
             
         </Menu.Item>
-            {user &&
+            {currentUser  &&
             <Menu.Item position='right'>
             <Image avatar spaced='right' src={'/assests/user.png'} />
-            <Dropdown pointing='top right' text={user.firstName}>
+            <Dropdown pointing='top right' text={currentUser?.firstName}>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to={`/profile/username`} text='My profile' icon='user'/>
+                <Dropdown.Item as={Link} to={`/profile`} text='My profile' icon='user'/>
                 <Dropdown.Item onClick={logout} text='Logout' icon='power' />
               </Dropdown.Menu>
             </Dropdown>

@@ -12,7 +12,7 @@ const RisographFormList:React.FC = () => {
     const{risographForms} = rootStore.risographFormStore;
 
     return (
-        <Segment clearing  style={{marginRight : '10px',background:'PaleGreen'}} >
+        <Segment clearing   >
         <Item.Group divided>
             {risographForms.map(risographForm =>(
                 <Item key ={risographForm.risograghFormId}>
@@ -25,7 +25,7 @@ const RisographFormList:React.FC = () => {
                         </div>
                 </Item.Description>
                 <Item.Extra>
-                    <Button as = {Link}  to={`/risographForms/${risographForm.risograghFormId}`} floated='right' content='View Application' color='green'></Button>
+                    <Button as = {Link}  to={`/risographForms/${risographForm.risograghFormId}`} floated='right' content='View Application' color='blue'></Button>
                     <Label  style={{background:'LightGreen'}} basic content='Risograph Copies Request'/>
                     <Label  style={{background:'LightGreen'}} basic content={risographForm.formStatus} />
                 </Item.Extra>

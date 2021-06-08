@@ -8,7 +8,7 @@ export const TopMenuBar = () => {
   let {  url } = useRouteMatch();
     return (
         <div>
-        <Menu pointing>
+        <Menu  pointing>
           <Menu.Item
             name='Home'
             as ={NavLink} exact to={`${url}`}
@@ -22,9 +22,9 @@ export const TopMenuBar = () => {
             as ={NavLink} to={`${url}/inbox`}
           />
           <Menu.Menu position='right'>
-            <Menu.Item>
+            {/* <Menu.Item>
               <Input icon='search' placeholder='Search...' />
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu.Menu>
         </Menu>
 
