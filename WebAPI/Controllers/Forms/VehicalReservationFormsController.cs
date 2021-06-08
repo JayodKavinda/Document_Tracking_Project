@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -39,14 +40,14 @@ namespace WebAPI.Controllers.Forms
         {
             return await _context.VehicalReservationForms.ToListAsync();
         }*/
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VehicalReservationForm>>> GetVehicalReservationForms(string id)
         {
             return await _context.VehicalReservationForms.Where(x => x.UserId == id).ToListAsync();
         }
 
-
+        [Authorize]
         [Route("inbox")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VehicalReservationForm>>> GetInboxRisograghForm(string id)
@@ -57,6 +58,7 @@ namespace WebAPI.Controllers.Forms
 
 
         // GET: api/VehicalReservationForms/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<VehicalReservationForm>> GetVehicalReservationForm(int id)
         {
@@ -73,6 +75,7 @@ namespace WebAPI.Controllers.Forms
         // PUT: api/VehicalReservationForms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVehicalReservationForm(int id, VehicalReservationForm vehicalReservationForm)
         {
@@ -102,9 +105,10 @@ namespace WebAPI.Controllers.Forms
             return NoContent();
         }
 
-       
+
 
         // DELETE: api/VehicalReservationForms/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<VehicalReservationForm>> DeleteVehicalReservationForm(int id)
         {
