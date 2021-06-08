@@ -2,7 +2,7 @@ import axios, { AxiosResponse }  from 'axios';
 import { history } from '../..';
 import { IRisographForm } from '../models/risographForm';
 import { IVehicalReservationForm } from '../models/vehicalReservationForm';
-import { ICurrentUser, IUser, IUserForm } from '../models/user';
+import { ICurrentUser, IPasswaordChange, IUser, IUserForm } from '../models/user';
 
 var flag= false;
 
@@ -40,9 +40,9 @@ const sleep = (ms:number)=> (response: AxiosResponse) =>
 
 
 const requests = {
-    get:(url:string)=> axios.get(url).then(sleep(1000)).then(responseBody),
-    post:(url:string, body:{})=> axios.post(url,body).then(sleep(1000)).then(responseBody),
-    put: (url: string, body: {}) => axios.put(url, body).then(sleep(1000)).then(responseBody)
+    get:(url:string)=> axios.get(url).then(responseBody),
+    post:(url:string, body:{})=> axios.post(url,body).then(responseBody),
+    put: (url: string, body: {}) => axios.put(url, body).then(responseBody)
 }
 
 const RisographForms ={ 
@@ -66,7 +66,8 @@ const VehicalReservationForms ={
 const User = {
     current:(id:string|null): Promise<ICurrentUser| null> => requests.get(`/accounts/current?id=${id}`),
     login:(user : IUserForm) : Promise<IUser> => requests.post('accounts/login', user),
-    register:(user : IUserForm) : Promise<IUser> => requests.post('accounts/register', user)
+    register:(user : IUserForm) : Promise<IUser> => requests.post('accounts/register', user),
+    changePassword: (password: IPasswaordChange):Promise<IPasswaordChange> => requests.post('/Accounts/PasswordUpdate', password)
 }
 
 export default {RisographForms, User,VehicalReservationForms }

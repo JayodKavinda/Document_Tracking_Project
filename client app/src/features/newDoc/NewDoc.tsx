@@ -6,7 +6,7 @@ export const NewDoc = () => {
     let {  url } = useRouteMatch();
     return (
         <Container >
-
+            
             <Card.Group itemsPerRow={4}  style={{marginTop:'5em'}}>
             <Card fluid>
                         <Image src='/assests/newDoc.png' wrapped ui={false} />

@@ -69,7 +69,7 @@ import { RootStoreContext } from '../stores/rootStore';
     return (
         <Container fluid>
             <Grid>
-                <Grid.Column width={4}  style={{background: '#182A73', height: '70em' }}>
+                <Grid.Column mobile={16} tablet={4} computer={4}  style={{background: '#182A73', height: '70em' }}>
                 <Header size='huge' inverted  style={{margin:'1em'}}>
                     Document Tracking System
                     <Header.Subheader>
@@ -102,9 +102,9 @@ import { RootStoreContext } from '../stores/rootStore';
                 </Grid.Column>
 
 
-                <Grid.Column width={8} >
+                <Grid.Column   mobile={16} tablet={12} computer={8} >
                     <Label  size='huge'>Personal Dashboard</Label>
-                <Card.Group itemsPerRow={4}>
+                <Card.Group centered >
                 <Card  color = 'blue'  onClick = {openSendDoc}>
                     <Image src='/assests/dashboard_send.png'  />
                     <Card.Content>
@@ -234,11 +234,11 @@ import { RootStoreContext } from '../stores/rootStore';
 
 
 
-                <Grid.Column width={4}>
+                <Grid.Column mobile={16} tablet={8} computer={4}>
                 <Card>
                     <Card.Content>
                     <Card.Header>Your Information</Card.Header>
-                    <Image src='/assests/user.png'  />
+                    {/* <Image src='/assests/user.png'  /> */}
                     
                     <Card.Description>
                        Mr. {currentUser?.firstName}  {currentUser?.lastName}<br/>

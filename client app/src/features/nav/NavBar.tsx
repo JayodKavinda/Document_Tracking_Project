@@ -10,7 +10,7 @@ const NavBar: React.FC =() => {
         const{ user, logout, currentUser} = rootStore.userStore
         
     return (
-        <Menu fixed = 'top' inverted>
+        <Menu fixed = 'top' inverted stackable>
 
         <Container fluid>
         <Menu.Item header as ={NavLink} exact to ='/'>
@@ -34,7 +34,7 @@ const NavBar: React.FC =() => {
             <Image avatar spaced='right' src={'/assests/user.png'} />
             <Dropdown pointing='top right' text={currentUser?.firstName}>
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to={`/profile/username`} text='My profile' icon='user'/>
+                <Dropdown.Item as={Link} to={`/profile`} text='My profile' icon='user'/>
                 <Dropdown.Item onClick={logout} text='Logout' icon='power' />
               </Dropdown.Menu>
             </Dropdown>

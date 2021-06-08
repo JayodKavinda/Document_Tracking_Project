@@ -22,9 +22,9 @@ export const TopMenuBar = () => {
             as ={NavLink} to={`${url}/inbox`}
           />
           <Menu.Menu position='right'>
-            <Menu.Item>
+            {/* <Menu.Item>
               <Input icon='search' placeholder='Search...' />
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu.Menu>
         </Menu>
 

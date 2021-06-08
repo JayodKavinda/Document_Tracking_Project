@@ -73,7 +73,10 @@ const VehicalReservationForm: React.FC<RouteComponentProps> = ({history}) => {
     const handleSubmit = () => {
         let newVehicalReservationForm={
             ...vehicalReservationForm, 
-            initDateTime: '2021-03-24T16:49',
+            initDateTime: '2021-08-13T16:49',
+            level2UserDateTime : '2021-08-13T20:49',
+            level3UserDateTime : '2021-08-13T20:52',
+            level4UserDateTime : '2021-08-13T20:59',
             userId: window.localStorage.getItem('userId'),  //getting current user
 
             applicant : currentUser!.firstName,
@@ -82,6 +85,10 @@ const VehicalReservationForm: React.FC<RouteComponentProps> = ({history}) => {
             level2UserId:'8dfaae4b-83a8-41cb-b69b-f7e04e236151',  // coonst hoD -> retrive relevent HoDs id
             level3UserId:'71a76dba-9153-4400-ab8d-c012268d7fc6', // coonst AR -> retrive relevent AR id
             level4UserId:'35b9e725-ed59-4018-95b7-54ce8d5f98d9'  // coonst Dean -> retrive relevent Dean id
+
+           // level2UserId:'4af85b94-8866-4d3c-a90e-f29dbfad0c46',  // coonst hoD -> retrive relevent HoDs id
+            //level3UserId:'c216efe7-943b-44cf-b025-3244079152cb', // coonst AR -> retrive relevent AR id
+           // level4UserId:'84f9b0c4-be7e-4e9c-8fdc-951954be6bf9'  // coonst Dean -> retrive relevent Dean id
         };
         createVehicalReservationForm(newVehicalReservationForm)
    
@@ -150,7 +157,7 @@ const VehicalReservationForm: React.FC<RouteComponentProps> = ({history}) => {
 
         </Container>
 
-        <Card fluid>
+        <Card fluid style={{marginEnd:'5em'}}>
         
               <Card.Content>
                 <Card.Header>Here is your Document flow</Card.Header>
@@ -171,7 +178,7 @@ const VehicalReservationForm: React.FC<RouteComponentProps> = ({history}) => {
                 <Icon name='hourglass half' color='orange'/>
                   <Step.Content>
                     <Step.Title>Level 1: Submission</Step.Title>
-                    <Step.Description></Step.Description>
+                    <Step.Description>Sumbmission by You</Step.Description>
                   </Step.Content>
                 </Step>
 
@@ -195,7 +202,7 @@ const VehicalReservationForm: React.FC<RouteComponentProps> = ({history}) => {
                 <Icon name='hourglass half' color='orange'/>
                   <Step.Content>
                   <Step.Title>Final Level: </Step.Title>
-                    <Step.Description>Approval of Head of the Dean</Step.Description>
+                    <Step.Description> Dean</Step.Description>
                   </Step.Content>
                 </Step>
 

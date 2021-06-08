@@ -20,3 +20,10 @@ export interface ICurrentUser {
     
 }
 
+export interface IPasswaordChange{
+    email:string
+    oldPassword:string
+    NewPassword:string
+    confirmPassword:string
+}
+

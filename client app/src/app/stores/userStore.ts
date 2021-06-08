@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { act } from "react-dom/test-utils";
 import { history } from "../..";
 import agent from "../api/agent";
-import { ICurrentUser, IUser, IUserForm } from "../models/user";
+import { ICurrentUser, IPasswaordChange, IUser, IUserForm } from "../models/user";
 import { RootStore } from "./rootStore";
 
 export default class UserStore{
@@ -50,6 +50,25 @@ export default class UserStore{
           
         } catch (error) {
            // console.log(error)
+        }
+    }
+
+    @action updatePassword = async (password:IPasswaordChange)=>{
+        try {
+            const currUser = await agent.User.changePassword(password);
+            runInAction(()=>{
+               // this.currentUser =currUser;
+               this.rootStore.commonStore.setToken(null);
+               this.rootStore.commonStore.setUserId(null);
+               this.user =null;
+               this.currentUser = null;
+               history.push('/')
+                console.log(currUser)
+            })
+          
+        } catch (error) {
+            //console.log(error)
+            throw error;
         }
     }
 

@@ -17,6 +17,8 @@ import BlankForm from '../../features/risographForms/form/BlankForm';
 import VehicalReservationForm from '../../features/vehicalReservationForm/form/VeicalReservationForm'
 import VehicalReservationFormDetails from '../../features/vehicalReservationForm/details/VehicalReserationFormDetails'
 import VehicalFormManage from '../../features/vehicalReservationForm/details/VehicalFormMange'
+import VehicalPdf from '../../features/vehicalReservationForm/details/VehicalPdf'
+import Profile from '../../features/user/Profile'
 
 const App =()=> {
 
@@ -38,7 +40,9 @@ const App =()=> {
               <Route exact path='/vehicalReservationForms/:id' component ={VehicalReservationFormDetails}/>
               <Route path='/risographForms/manage/:id' component ={RisographFormManage}/>
               <Route path='/vehicalReservationForm/manage/:id' component ={VehicalFormManage}/>
+              <Route path='/vehicalReservationForm/print' component ={VehicalPdf}/>
               <Route exact path='/createDoc' component ={NewDoc}/> 
+              <Route exact path='/profile' component ={Profile}/> 
               <Route path='/createDoc/risographForm' component ={RisographForm}/> 
               <Route path='/createDoc/blankForm' component ={BlankForm}/> 
               <Route path='/createDoc/vehicalReservationForm' component ={VehicalReservationForm}/> 

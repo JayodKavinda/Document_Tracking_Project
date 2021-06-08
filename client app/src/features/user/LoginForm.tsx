@@ -18,7 +18,7 @@ const LoginForm = () => {
 
             <Segment  textAlign='center' vertical style={{marginTop:'2em', marginBotton:'2em'}} >
                     <Grid verticalAlign='middle' divided padded>
-                        <Grid.Column width={8} >
+                        <Grid.Column mobile={16} tablet={16} computer={8} >
                         <Container fluid text>
                                 <Header as='h1' size='huge' textAlign='center'>
                                 <Image src='/assests/logo.jpg'  />
@@ -63,7 +63,7 @@ const LoginForm = () => {
                             </Container>
                 
                         </Grid.Column>
-                        <Grid.Column  width={8}>
+                        <Grid.Column  mobile={16} tablet={16} computer={8}>
                         <Image src='/assests/login.jpg' fluid />
                         </Grid.Column>
                     </Grid>

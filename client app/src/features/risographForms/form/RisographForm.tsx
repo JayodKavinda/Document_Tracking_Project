@@ -51,6 +51,7 @@ const RisographForm: React.FC<RouteComponentProps> = ({history}) => {
         
       };
 
+      
     const [risographForm, setRisographForm] = useState<IRisographForm>(initializeForm);
 
     const handleSubmit = () => {

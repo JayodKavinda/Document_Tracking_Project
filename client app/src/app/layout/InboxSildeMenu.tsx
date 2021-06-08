@@ -9,7 +9,7 @@ import InboxVehicalFormList from  '../../features/vehicalReservationForm/dashboa
 
     return (
         <Grid >
-        <Grid.Column  width={3} style={{background: '#182A73', height: '70em' }}>
+        <Grid.Column  mobile={16} tablet={3} computer={3} style={{background: '#182A73', height: '70em' }}>
           <Menu inverted fluid vertical   style={{marginTop:'3em',  background: '#182A73'}} >
             
             <Menu.Item
@@ -37,7 +37,7 @@ import InboxVehicalFormList from  '../../features/vehicalReservationForm/dashboa
           </Menu>
         </Grid.Column>
 
-        <Grid.Column stretched width={10}>
+        <Grid.Column stretched mobile={16} tablet={13} computer={10}>
           
           <Switch>
                 <Route exact path={path}>
@@ -56,7 +56,7 @@ import InboxVehicalFormList from  '../../features/vehicalReservationForm/dashboa
          
         </Grid.Column>
 
-        <Grid.Column  width={3}>
+        <Grid.Column mobile={16} tablet={3} computer={3}>
       
 
       <Card fluid>

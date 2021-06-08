@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, {  useContext, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Button, ButtonGroup, Card, Container, Divider, Header, Icon, Label, Step } from 'semantic-ui-react'
+import { Button, ButtonGroup, Card, Container, Divider, Form, Header, Icon, Label, Step } from 'semantic-ui-react'
 import LoadingComponent from '../../../app/layout/LoadingComponent'
 import { RootStoreContext } from '../../../app/stores/rootStore'
 
@@ -92,7 +92,7 @@ interface DetailParams{
           <Card.Header> Vehical Reservatio application by: {vehicalForm!.applicant} </Card.Header>
           
           <Card.Meta>
-            <span>This document is sumbitted by you at {vehicalForm!.initDateTime} for the approval of Head of the Department, AR and Dean</span>
+            <span>This document is sumbitted by {vehicalForm.applicant} at {vehicalForm!.initDateTime} for the approval of Head of the Department, AR and Dean</span>
           </Card.Meta>
           <br></br>
           <Card.Description>
@@ -117,40 +117,74 @@ interface DetailParams{
         <Divider/>
         
         
-        {vehicalForm.formCurrentLevel==1 && currentUser?.designation==='Head of the Department'&& vehicalForm.formStatus === 'Pending'&&
+        {vehicalForm.formCurrentLevel===1 && currentUser?.designation==='Head of the Department'&& vehicalForm.formStatus === 'Pending'&&
         <div>
           <Header>This Application is under your review, Your action ?</Header>
           <ButtonGroup  size='large' fluid>
           <Button  onClick={()=>updateForm('cancel','','','Canceled',2)} loading={submitting} basic icon='trash' color='orange' content = 'Cancel Application' />
           <Button  onClick={()=>updateForm('false','','','Rejected',2)} loading={submitting} basic icon='times' negative content = 'Reject Request' />
-          <Button onClick={()=>updateForm('true','','','Pending',2)} loading={submitting} icon='check' positive content = 'Approve Request' />
+          <Button onClick={()=>updateForm('true','','','Pending',2)} loading={submitting} icon='check' positive content = 'Approve and Forword' />
   
           </ButtonGroup>
         </div>
         }
 
-        {vehicalForm.formCurrentLevel==2 && currentUser?.designation==='Assistant Registrar' && vehicalForm.formStatus === 'Pending'&&
+      
+        {vehicalForm.formCurrentLevel===2 && currentUser?.designation==='Assistant Registrar' && vehicalForm.formStatus === 'Pending'?(
         <div>
+          
+          <Card.Header> Approval Pending Vehical Reservation application by: {vehicalForm!.applicant} </Card.Header>
+          <Card.Description>
+          <Form>
+          <Form.Field required control='select'  placeholder = "Size of copies needed"> 
+                <option >Can reserve vehical for above metioned time -select-</option>
+                  <option  value='Yes'>Yes</option>
+                  <option  value='No'>No</option>
+                </Form.Field>
+                </Form>
+          <h4>I approve the above vehical reservation , Approve and Forword to the Dean</h4>
+          </Card.Description>
+          
           <Header>This Application is under your review, Your action ?</Header>
           <ButtonGroup  size='large' fluid>
-          <Button  onClick={()=>updateForm(vehicalForm.isLevel2Approved,'cancel','','Canceled',3)} loading={submitting} basic icon='trash' color='orange' content = 'Cancel Application' />
-          <Button  onClick={()=>updateForm(vehicalForm.isLevel2Approved,'false','','Rejected',3)} loading={submitting} basic icon='times' negative content = 'Reject Request' />
-          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,'true','','Pending',3)} loading={submitting} icon='check' positive content = 'Approve Request' />
+          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,'cancel','','Canceled',3)} loading={submitting} basic icon='trash' color='orange' content = 'Cancel Application' />
+          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,'false','','Rejected',3)} loading={submitting} basic icon='times' negative content = 'Reject Request' />
+          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,'true','','Pending',3)} loading={submitting} icon='check' positive content = 'Approve and Forword' />
   
           </ButtonGroup>
         </div>
+        ):(vehicalForm.formCurrentLevel===1 && currentUser?.designation==='Assistant Registrar' && vehicalForm.formStatus === 'Pending' &&
+    
+          <div>
+          <Header>This Application still processing under Head of the Department</Header>
+          <span>This document is sumbitted by {vehicalForm.applicant} at {vehicalForm!.initDateTime}. Currently applicaion is under Head of the departmet's review </span>
+   
+        </div>
+        )
         }
        
-       {vehicalForm.formCurrentLevel==3 && currentUser?.designation==='Dean'&& vehicalForm.formStatus === 'Pending'&&
+       {vehicalForm.formCurrentLevel===3 && currentUser?.designation==='Dean'&& vehicalForm.formStatus === 'Pending' ?(
         <div>
           <Header>This Application is under your review, Your action ?</Header>
           <ButtonGroup  size='large' fluid>
           <Button  onClick={()=>updateForm(vehicalForm.isLevel2Approved,vehicalForm.isLevel3Approved,'cancel','Canceled',4)} loading={submitting} basic icon='trash' color='orange' content = 'Cancel Application' />
           <Button  onClick={()=>updateForm(vehicalForm.isLevel2Approved,vehicalForm.isLevel3Approved,'false','Rejected',4)} loading={submitting} basic icon='times' negative content = 'Reject Request' />
-          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,vehicalForm.isLevel3Approved,'true','Approved',4)} loading={submitting} icon='check' positive content = 'Approve Request' />
+          <Button onClick={()=>updateForm(vehicalForm.isLevel2Approved,vehicalForm.isLevel3Approved,'true','Approved',4)} loading={submitting} icon='check' positive content = 'Final Approval' />
   
           </ButtonGroup>
-        </div>
+        </div>):(vehicalForm.formCurrentLevel===1 && currentUser?.designation==='Dean'&& vehicalForm.formStatus === 'Pending' ? (
+          <div>
+          <Header>This Application still processing under Head of the Department level</Header>
+          <span>This document is sumbitted by {vehicalForm.applicant} at {vehicalForm!.initDateTime}. Currently applicaion is under Head of the departmet's review </span>
+   
+        </div>):(vehicalForm.formCurrentLevel===2 && currentUser?.designation==='Dean'&& vehicalForm.formStatus === 'Pending' &&
+            <div>
+            <Header>This Application still processing Assistant Registrar level</Header>
+            <span>This document is sumbitted by {vehicalForm.applicant} at {vehicalForm!.initDateTime}. Currently applicaion is under Assitant Registrar's review </span>
+  
+            </div>
+          )
+        )
         }
         <Divider/>
 
@@ -199,7 +233,7 @@ interface DetailParams{
             }
             <Step.Content>
               <Step.Title>Level 3:AR</Step.Title>
-              <Step.Description>Approval of Head of the Department</Step.Description>
+              <Step.Description>Approval of Asistant Registrar</Step.Description>
             </Step.Content>
           </Step>
 
@@ -211,7 +245,7 @@ interface DetailParams{
             }
             <Step.Content>
               <Step.Title>Final Level: Dean</Step.Title>
-              <Step.Description>Approval of Head of the Department</Step.Description>
+              <Step.Description>Approval of Dean</Step.Description>
             </Step.Content>
           </Step>
 
