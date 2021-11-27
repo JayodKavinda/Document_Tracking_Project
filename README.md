@@ -4,6 +4,10 @@
 ### **Version**
 * 1.0
 
+### **Web URL**
+* https://dtsruhuna.azurewebsites.net
+
+
 This is a document tracking platform important for management of an organization. Different users in this system can access the system via different authentication levels, manage internal and external the documents and monitor the documentation process flow through their authentication level.
 
 This product can manage the documents and some application forms which need to be submitted by academic staff members, non-academic staff member or student of faculty of engineering university of Ruhuna.
